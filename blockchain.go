@@ -13,3 +13,7 @@ func (bc Blockchain) AddBlock(data string) {
 func NewGenesisBlock() *Block {
 	return NewBlock("first block", []byte{})
 }
+
+func newBlockChain() *Blockchain{
+	return &Blockchain{[]*Block{NewGenesisBlock()}}
+}
