@@ -1,6 +1,6 @@
 package blockchain
 
-import bolt
+import "github.com/boltdb/bolt"
 
 type Blockchain struct {
 	Blocks []*Block
