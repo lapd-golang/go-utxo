@@ -3,7 +3,8 @@ package blockchain
 import "github.com/boltdb/bolt"
 
 type Blockchain struct {
-	Blocks []*Block
+	tip []byte
+	db  *bolt.DB
 }
 
 func (bc Blockchain) AddBlock(data string) {
