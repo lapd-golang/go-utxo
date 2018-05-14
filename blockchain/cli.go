@@ -3,6 +3,7 @@ package blockchain
 import (
 	"flag"
 	"os"
+	"fmt"
 )
 
 type CLI struct {
@@ -38,4 +39,9 @@ func (cli *CLI) Run() {
 	if printChainCmd.Parsed() {
 		cli.printChain()
 	}
+}
+
+func (cli *CLI) addBlock(data string) {
+	cli.bc.AddBlock(data)
+	fmt.Println("Success!")
 }
