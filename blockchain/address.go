@@ -1,6 +1,10 @@
 package blockchain
 
-import "crypto/ecdsa"
+import (
+	"crypto/ecdsa"
+	"crypto/elliptic"
+	"crypto/rand"
+)
 
 type Wallet struct {
 	PrivateKey ecdsa.PrivateKey
@@ -16,4 +20,12 @@ func NewWallet() *Wallet {
 	wallet := Wallet{private, public}
 
 	return &wallet
+}
+
+func newKeyPair() (ecdsa.PrivateKey, []byte) {
+	curve := elliptic.P256()
+	private, _ := ecdsa.GenerateKey(curve, rand.Reader)
+	pubKey := append(private.PublicKey.X.Bytes(), private.PublicKey.Y.Bytes()...)
+
+	return *private, pubKey
 }
