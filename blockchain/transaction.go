@@ -163,3 +163,7 @@ Work:
 
 	return accumulated, unspentOutputs
 }
+
+func (out *TXOutput) IsLockedWithKey(pubKeyHash []byte) bool {
+	return bytes.Compare(out.PubKeyHash, pubKeyHash) == 0
+}
