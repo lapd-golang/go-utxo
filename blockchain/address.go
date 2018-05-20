@@ -10,3 +10,10 @@ type Wallet struct {
 type Wallets struct {
 	Wallets map[string]*Wallet
 }
+
+func NewWallet() *Wallet {
+	private, public := newKeyPair()
+	wallet := Wallet{private, public}
+
+	return &wallet
+}
