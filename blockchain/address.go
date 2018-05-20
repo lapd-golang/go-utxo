@@ -52,3 +52,9 @@ func (w Wallet) GetAddress() []byte {
 	return address
 }
 
+func checksum(payload []byte) []byte {
+	firstSHA := sha256.Sum256(payload)
+	secondSHA := sha256.Sum256(firstSHA[:])
+
+	return secondSHA[:addressChecksumLen]
+}
