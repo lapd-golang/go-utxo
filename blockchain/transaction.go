@@ -3,6 +3,7 @@ package blockchain
 import (
 	"fmt"
 	"encoding/hex"
+	"bytes"
 )
 
 type Transaction struct {
@@ -17,9 +18,16 @@ type TXOutput struct {
 }
 
 type TXInput struct {
-	Txid []byte
-	Vout int
-	ScriptSig string
+	Txid      []byte
+	Vout      int
+	Signature []byte
+	PubKey    []byte
+}
+
+func (in *TXInput) UsesKey(pubKeyHash []byte) bool {
+	lockingHash := HashPubKey(in.PubKey)
+
+	return bytes.Compare(lockingHash, pubKeyHash) == 0
 }
 
 func NewCoinbaseTX(to, data string) *Transaction {
